@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SubjectsService } from '../../services/subjects.service';
+import { SubjectSummary } from '../../interfaces/subject-summary';
 
 @Component({
   selector: 'app-subject-page',
@@ -8,12 +10,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SubjectPagePage implements OnInit {
 
-  subject = null;
+  subject: SubjectSummary;
+  subjectSummary = null;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private subjectsService: SubjectsService) { }
 
   ngOnInit() {
-    this.subject = this.route.snapshot.paramMap.get('id');
+    const subjectId = this.route.snapshot.paramMap.get('id');
+    this.subject = this.subjectsService.getSubjectDetails(subjectId);
+  }
+
+  ionViewWillEnter() {
+    this.subjectSummary = this.subjectsService.getSubjectSummary(this.subject.id);
+    this.subjectSummary.subscribe(sum => {
+      console.log('Subject summary: ', sum);
+    });
   }
 
 }

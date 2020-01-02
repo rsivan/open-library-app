@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  apiUrl: 'http:/openlibrary.org',
+  apiUrl: 'http://openlibrary.org',
 };
 
 /*

@@ -16,7 +16,7 @@ export class SubjectsService {
     'Recipes',
     'Romance',
     'Religion',
-    'Mistery and Detective Stories',
+    'Mystery and Detective Stories',
     'Music',
     'Medicine',
     'Plays',
@@ -34,12 +34,16 @@ export class SubjectsService {
     return this.subjectsList.map(s => {
       return {
         title: s,
-        id: s,
+        id: s.toLowerCase().replace(/ /g, '_'),
       };
     });
   }
 
+  getSubjectDetails(subject) {
+    return this.subjects.find(s => s.id === subject);
+  }
+
   getSubjectSummary(subject: string) {
-    return this.http.get<any>(`${this.apiUrl}/${subject}.json`);
+    return this.http.get<any>(`${this.apiUrl}/subjects/${subject}.json`);
   }
 }
