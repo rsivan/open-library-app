@@ -35,10 +35,10 @@ export class WorkPagePage implements OnInit {
         description: res.description ?
           (res.description.value ? res.description.value : res.description) :
           'There is no description for this book yet.',
-        authors: res.authors.map(a => ({
+        authors: res.authors ? res.authors.map(a => ({
           name: a.author.key,
           id: (a.author.key as string).replace(/\/authors\//, ''),
-        })),
+        })) : [],
         covers: res.covers ? res.covers : [],
       };
       this.work.authors.forEach(a => {
