@@ -1,5 +1,7 @@
 {
   "name": "openlibrary",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
