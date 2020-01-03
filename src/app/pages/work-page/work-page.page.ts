@@ -38,8 +38,8 @@ export class WorkPagePage implements OnInit {
         )
       };
       this.work.authors.forEach(a => {
-        this.authorsService.fetchWork(a.url).subscribe(res => {
-          a.name = res.name;
+        this.authorsService.fetchWork(a.url).subscribe(authRes => {
+          a.name = authRes.name;
         });
       });
       console.log('work: ', this.work);
