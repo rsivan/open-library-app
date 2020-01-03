@@ -4,6 +4,7 @@ import { WorksService } from '../../services/works.service';
 import { take } from 'rxjs/operators';
 import { Work } from '../../interfaces/work';
 import { AuthorsService } from '../../services/authors.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-work-page',
@@ -12,6 +13,7 @@ import { AuthorsService } from '../../services/authors.service';
 })
 export class WorkPagePage implements OnInit {
 
+  private coversUrl = environment.coversUrl;
   workId: string;
   work: Work;
 
@@ -36,8 +38,8 @@ export class WorkPagePage implements OnInit {
         authors: res.authors.map(a => ({
           name: a.author.key,
           url: a.author.key,
-        })
-        )
+        })),
+        covers: res.covers ? res.covers : [],
       };
       this.work.authors.forEach(a => {
         this.authorsService.fetchWork(a.url).subscribe(authRes => {
@@ -46,6 +48,14 @@ export class WorkPagePage implements OnInit {
       });
       console.log('work: ', this.work);
     });
+  }
+
+  hasCover() {
+    return this.work && this.work.covers.length > 0;
+  }
+
+  getCoverUrl() {
+    return `${this.coversUrl}/w/id/${this.work.covers[0]}-L.jpg`;
   }
 
 }

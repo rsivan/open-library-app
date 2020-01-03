@@ -5,4 +5,5 @@ export interface Work {
     title: string;
     description: string;
     authors: Author[];
+    covers: string[];
 }
