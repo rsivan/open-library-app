@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { WorkPagePageRoutingModule } from './work-page-routing.module';
 
 import { WorkPagePage } from './work-page.page';
+import { SharedPipesModule } from '../../pipes/shared-pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkPagePageRoutingModule
+    WorkPagePageRoutingModule,
+    SharedPipesModule
   ],
   declarations: [WorkPagePage]
 })
