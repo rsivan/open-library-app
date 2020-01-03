@@ -23,7 +23,7 @@ export class AuthorsService {
       map(res => ({
         id,
         name: res.name,
-        bio: res.bio.value ? res.bio.value : res.bio,
+        bio: res.bio ? (res.bio.value ? res.bio.value : res.bio) : 'No bio',
         photos: res.photos || [],
         birth_date: res.birth_date,
         death_date: res.death_date,
