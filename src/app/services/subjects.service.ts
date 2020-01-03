@@ -48,8 +48,8 @@ export class SubjectsService {
     return { ...this.subjectsMap.get(subjectId) };
   }
 
-  fetchSubjectSummary(subject: string) {
-    return this.http.get<any>(`${this.apiUrl}/subjects/${subject}.json`);
+  fetchSubjectSummary(subject: string, offset = 0, limit = 20) {
+    return this.http.get<any>(`${this.apiUrl}/subjects/${subject}.json?limit=${limit}&offset=${offset}`);
   }
 
   private summary(title: string): SubjectSummary {
