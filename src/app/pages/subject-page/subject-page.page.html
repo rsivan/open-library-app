@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let work of works">
+    <ion-item *ngFor="let work of works" [routerLink]='[work.key]' button=true detail=true lines='none'>
       <ion-label>
         <h2>{{work.title}}</h2>
         <p *ngFor="let author of work.authors">{{author.name}}</p>

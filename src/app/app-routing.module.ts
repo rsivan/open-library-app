@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'subjects/:id',
     loadChildren: () => import('./pages/subject-page/subject-page.module').then( m => m.SubjectPagePageModule)
+  },
+  {
+    path: 'works/:id',
+    loadChildren: () => import('./pages/work-page/work-page.module').then( m => m.WorkPagePageModule)
   }
 ];
 
