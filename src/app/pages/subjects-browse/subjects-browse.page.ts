@@ -25,4 +25,8 @@ export class SubjectsBrowsePage implements OnInit {
       });
     });
   }
+
+  getImageUrl(subj: SubjectSummary) {
+    return `http://openlibrary.org/static/images/categories/${subj.image}`;
+  }
 }

@@ -10,25 +10,23 @@ import { map } from 'rxjs/operators';
 })
 export class SubjectsService {
 
-  private subjectsList: string[] = [
-    'Art',
-    'Fantasy',
-    'Biographies',
-    'Science',
-    'Recipes',
-    'Romance',
-    'Religion',
-    'Mystery and Detective Stories',
-    'Music',
-    'Medicine',
-    'Plays',
-    'History',
-    'Children',
-    'Science Fiction',
-    'Textbooks',
+  private subjectsList: SubjectSummary[] = [
+    this.summary('Art'),
+    this.summary('Fantasy'),
+    this.summary('Biographies'),
+    this.summary('Science'),
+    this.summary('Recipes'),
+    this.summary('Romance'),
+    this.summary('Religion'),
+    this.summary('Mystery and Detective Stories'),
+    this.summary('Music'),
+    this.summary('Medicine'),
+    this.summary('Plays'),
+    this.summary('History'),
+    this.summary('Children'),
+    this.summary('Science Fiction'),
+    this.summary('Textbooks'),
   ];
-
-  private subjectIdsList: string[] = [];
 
   private subjectsMap: Map<string, SubjectSummary> = new Map();
 
@@ -36,19 +34,14 @@ export class SubjectsService {
 
   constructor(private http: HttpClient) {
     this.subjectsList.forEach(s => {
-      const id1 = s.toLowerCase().replace(/ /g, '_');
-      const val: SubjectSummary = {
-        title: s,
-        id: id1,
-        total: 0,
-      };
-      this.subjectsMap.set(id1, val);
-      this.subjectIdsList.push(id1);
+      this.subjectsMap.set(s.id, s);
     });
   }
 
   getSubjects(): SubjectSummary[] {
-    return this.subjectIdsList.map(sid => this.getSubject(sid));
+    return this.subjectsList.map(s => {
+      return {...s};
+    });
   }
 
   getSubject(subjectId): SubjectSummary {
@@ -57,5 +50,16 @@ export class SubjectsService {
 
   fetchSubjectSummary(subject: string) {
     return this.http.get<any>(`${this.apiUrl}/subjects/${subject}.json`);
+  }
+
+  private summary(title: string): SubjectSummary {
+    const id1 = title.toLowerCase().replace(/ /g, '_');
+    const val: SubjectSummary = {
+      title,
+      id: id1,
+      total: 0,
+      image: `${id1}.svg`,
+    };
+    return val;
   }
 }
