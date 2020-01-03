@@ -14,11 +14,11 @@ export class AuthorsService {
 
   constructor(private http: HttpClient) { }
 
-  fetchWork(authorUrl: string): Observable<Author> {
-    return this.http.get<any>(`${this.apiUrl}${authorUrl}.json`).pipe(
+  fetchWork(id: string): Observable<Author> {
+    return this.http.get<any>(`${this.apiUrl}/authors/${id}.json`).pipe(
       take(1),
       map(res => ({
-        url: authorUrl,
+        id,
         name: res.name,
       })
     ));

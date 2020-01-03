@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'works/:id',
     loadChildren: () => import('./pages/work-page/work-page.module').then( m => m.WorkPagePageModule)
+  },
+  {
+    path: 'authors/:id',
+    loadChildren: () => import('./pages/author/author.module').then( m => m.AuthorPageModule)
   }
 ];
 

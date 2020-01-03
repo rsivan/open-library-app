@@ -37,12 +37,12 @@ export class WorkPagePage implements OnInit {
           'There is no description for this book yet.',
         authors: res.authors.map(a => ({
           name: a.author.key,
-          url: a.author.key,
+          id: (a.author.key as string).replace(/\/authors\//, ''),
         })),
         covers: res.covers ? res.covers : [],
       };
       this.work.authors.forEach(a => {
-        this.authorsService.fetchWork(a.url).subscribe(authRes => {
+        this.authorsService.fetchWork(a.id).subscribe(authRes => {
           a.name = authRes.name;
         });
       });
