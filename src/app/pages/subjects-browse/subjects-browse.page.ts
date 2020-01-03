@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectsService } from '../../services/subjects.service';
 import { SubjectSummary } from '../../interfaces/subject-summary';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-subjects-browse',
@@ -14,11 +15,14 @@ export class SubjectsBrowsePage implements OnInit {
   constructor(private subjectsService: SubjectsService) { }
 
   ngOnInit() {
-    this.subjects = this.subjectsService.subjects;
-    console.log('Subjects: ', this.subjects);
-  }
-
-  onSubjectSelected(event) {
-    console.log('onSubjectSelected: ', event);
+    this.subjects = this.subjectsService.getSubjects();
+    this.subjects.forEach(s => {
+      this.subjectsService.fetchSubjectSummary(s.id).pipe(
+        take(1)
+      ).subscribe(res => {
+        // console.log('res: ', res);
+        s.total = res.work_count;
+      });
+    });
   }
 }

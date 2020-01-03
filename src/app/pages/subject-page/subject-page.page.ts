@@ -11,7 +11,6 @@ import { SubjectSummary } from '../../interfaces/subject-summary';
 export class SubjectPagePage implements OnInit {
 
   subject: SubjectSummary;
-  subjectSummary = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,14 +18,10 @@ export class SubjectPagePage implements OnInit {
 
   ngOnInit() {
     const subjectId = this.route.snapshot.paramMap.get('id');
-    this.subject = this.subjectsService.getSubjectDetails(subjectId);
+    this.subject = this.subjectsService.getSubject(subjectId);
   }
 
   ionViewWillEnter() {
-    this.subjectSummary = this.subjectsService.getSubjectSummary(this.subject.id);
-    this.subjectSummary.subscribe(sum => {
-      console.log('Subject summary: ', sum);
-    });
   }
 
 }
