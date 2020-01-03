@@ -30,7 +30,9 @@ export class WorkPagePage implements OnInit {
       this.work = {
         id: this.workId,
         title: res.title,
-        description: res.description && res.description.value ? res.description.value : 'There is no description for this book yet.',
+        description: res.description ?
+          (res.description.value ? res.description.value : res.description) :
+          'There is no description for this book yet.',
         authors: res.authors.map(a => ({
           name: a.author.key,
           url: a.author.key,

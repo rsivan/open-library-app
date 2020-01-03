@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>About the Book</ion-card-title>
+      <ion-card-title>{{work?.title}}</ion-card-title>
       <ion-card-subtitle>By 
         <span *ngFor="let author of work?.authors; let isLast=last">
           <a href='author.url'>{{author.name}}{{isLast?'':', '}}</a>
