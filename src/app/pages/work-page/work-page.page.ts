@@ -42,7 +42,7 @@ export class WorkPagePage implements OnInit {
         covers: res.covers ? res.covers : [],
       };
       this.work.authors.forEach(a => {
-        this.authorsService.fetchWork(a.id).subscribe(authRes => {
+        this.authorsService.fetchAuthor(a.id).subscribe(authRes => {
           a.name = authRes.name;
         });
       });

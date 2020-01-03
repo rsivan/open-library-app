@@ -3,10 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/subjects"></ion-back-button>
     </ion-buttons>
-    <ion-title>Author: {{authorId}}</ion-title>
+    <ion-title>{{author?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{author?.name}}</ion-card-title>
+      <ion-card-subtitle>{{author?.birth_date}} - {{author?.death_date}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="getPhotoUrl()" *ngIf="getPhotoUrl()"></ion-img>
+      <ion-item>
+        {{author?.bio}}
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

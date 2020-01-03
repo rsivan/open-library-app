@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Author } from '../interfaces/author';
-import { take, map } from 'rxjs/operators';
+import { take, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,19 @@ export class AuthorsService {
 
   constructor(private http: HttpClient) { }
 
-  fetchWork(id: string): Observable<Author> {
+  fetchAuthor(id: string): Observable<Author> {
     return this.http.get<any>(`${this.apiUrl}/authors/${id}.json`).pipe(
       take(1),
+      tap(res => {
+        console.log('author: ', res);
+      }),
       map(res => ({
         id,
         name: res.name,
+        bio: res.bio.value ? res.bio.value : res.bio,
+        photos: res.photos || [],
+        birth_date: res.birth_date,
+        death_date: res.death_date,
       })
     ));
   }
