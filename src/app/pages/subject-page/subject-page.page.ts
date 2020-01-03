@@ -4,6 +4,7 @@ import { SubjectsService } from '../../services/subjects.service';
 import { SubjectSummary } from '../../interfaces/subject-summary';
 import { take } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-subject-page',
@@ -12,6 +13,7 @@ import { SearchService } from '../../services/search.service';
 })
 export class SubjectPagePage implements OnInit {
 
+  private coversUrl = environment.coversUrl;
   subject: SubjectSummary;
   total = -1;
   works: any[] = [];
@@ -50,7 +52,8 @@ export class SubjectPagePage implements OnInit {
             authors: doc.author_name ?
               doc.author_name.map(n => ({
                 name: n
-              })) : []
+              })) : [],
+            coverId: doc.cover_i,
           };
           this.works.push(work);
         });
@@ -72,7 +75,8 @@ export class SubjectPagePage implements OnInit {
           const work = {
             key,
             title: w.title,
-            authors: w.authors
+            authors: w.authors,
+            coverId: w.cover_id,
           };
           this.works.push(work);
         });
@@ -103,5 +107,9 @@ export class SubjectPagePage implements OnInit {
     this.works = [];
     this.total = -1;
     this.fetchData();
+  }
+
+  getCoverUrl(work) {
+    return work && work.coverId ? `${this.coversUrl}/w/id/${work.coverId}-S.jpg` : null;
   }
 }

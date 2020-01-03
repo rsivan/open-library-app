@@ -18,7 +18,7 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item *ngIf="hasCover()">
+      <ion-item *ngIf="getCoverUrl()">
         <ion-img [src]="getCoverUrl()" class="cover"></ion-img>
       </ion-item>
       <ion-item>

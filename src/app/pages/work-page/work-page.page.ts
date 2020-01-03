@@ -50,12 +50,8 @@ export class WorkPagePage implements OnInit {
     });
   }
 
-  hasCover() {
-    return this.work && this.work.covers.length > 0;
-  }
-
   getCoverUrl() {
-    return `${this.coversUrl}/w/id/${this.work.covers[0]}-L.jpg`;
+    return this.work && this.work.covers.length > 0 ? `${this.coversUrl}/w/id/${this.work.covers[0]}-L.jpg` : null;
   }
 
 }
