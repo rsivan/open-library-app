@@ -3,6 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/subjects"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/']">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>{{subjectTitle}}</ion-title>
     <ion-title size="small">{{total}} works</ion-title>
   </ion-toolbar>
