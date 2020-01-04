@@ -1,29 +1,26 @@
 import { MetaPipe } from './meta.pipe';
 
 describe('MetaPipe', () => {
-  it('create an instance', () => {
-    const pipe = new MetaPipe();
-    expect(pipe).toBeTruthy();
-  });
   it ('null entry', () => {
-    const pipe = new MetaPipe();
-    expect(pipe.transform(null)).toBe(null);
+    expect(MetaPipe.transformer(null)).toBe(null);
   });
   it ('text with no stars', () => {
-    const pipe = new MetaPipe();
-    expect(pipe.transform('this text has no stars!')).toBe('this text has no stars!');
+    expect(MetaPipe.transformer('this text has no stars!')).toBe('this text has no stars!');
   });
   it ('text with one em word', () => {
-    const pipe = new MetaPipe();
-    expect(pipe.transform('this *text* is em\'ed!')).toBe('this <em>text</em> is em\'ed!');
+    expect(MetaPipe.transformer('this *text* is em\'ed!')).toBe('this <em>text</em> is em\'ed!');
   });
   it ('text fully em\'ed', () => {
-    const pipe = new MetaPipe();
-    expect(pipe.transform('*this text is fully em\'ed!*')).toBe('<em>this text is fully em\'ed!</em>');
+    expect(MetaPipe.transformer('*this text is fully em\'ed!*')).toBe('<em>this text is fully em\'ed!</em>');
   });
   it ('text with unmatched star', () => {
-    const pipe = new MetaPipe();
-    expect(pipe.transform('this *text has unmatched star')).toBe('this *text has unmatched star');
+    expect(MetaPipe.transformer('this *text has unmatched star')).toBe('this *text has unmatched star');
+  });
+  it ('text with double stars', () => {
+    expect(MetaPipe.transformer('this **text has double stars**')).toBe('this <h2>text has double stars</h2>');
+  });
+  it ('text with new line', () => {
+    expect(MetaPipe.transformer('this text has a new line:\nnext line')).toBe('this text has a new line:<br/>next line');
   });
   // it ('text with multiplications', () => {
   //   const pipe = new MetaPipe();
