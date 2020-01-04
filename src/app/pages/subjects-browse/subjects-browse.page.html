@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let subject of subjects" [routerLink]='[subject.id]' button=true detail=true lines='none'>
+    <ion-item *ngFor="let subject of subjects" [routerLink]='[subject.title]' button=true detail=true lines='none'>
       <ion-thumbnail>
         <ion-img [src]="getImageUrl(subject)" class="thumbnail"></ion-img>
       </ion-thumbnail>

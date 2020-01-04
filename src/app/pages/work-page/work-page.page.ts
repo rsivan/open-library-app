@@ -58,4 +58,7 @@ export class WorkPagePage implements OnInit {
     return this.work && this.work.covers.length > 0 ? `${this.coversUrl}/w/id/${this.work.covers[0]}-L.jpg` : null;
   }
 
+  getSubjectUrl(subject: string) {
+    return `/subjects/${subject}`;
+  }
 }

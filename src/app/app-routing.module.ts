@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/subjects-browse/subjects-browse.module').then( m => m.SubjectsBrowsePageModule)
   },
   {
-    path: 'subjects/:id',
+    path: 'subjects/:subjectTitle',
     loadChildren: () => import('./pages/subject-page/subject-page.module').then( m => m.SubjectPagePageModule)
   },
   {

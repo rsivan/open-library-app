@@ -17,7 +17,8 @@ export class SubjectPagePage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false}) infinityScroll: IonInfiniteScroll;
 
   private coversUrl = environment.coversUrl;
-  subject: SubjectSummary;
+  subjectId: string;
+  subjectTitle: string;
   total = -1;
   works: any[] = [];
   filter = '';
@@ -28,8 +29,9 @@ export class SubjectPagePage implements OnInit {
     private searchService: SearchService) { }
 
   ngOnInit() {
-    const subjectId = this.route.snapshot.paramMap.get('id');
-    this.subject = this.subjectsService.getSubject(subjectId);
+    this.subjectTitle = this.route.snapshot.paramMap.get('subjectTitle');
+    this.subjectId = this.subjectTitle.toLowerCase().replace(/ /g, '_');
+    console.log('Subject: ', this.subjectTitle);
     this.fetchData();
   }
 
@@ -65,7 +67,7 @@ export class SubjectPagePage implements OnInit {
         }
       });
     } else {
-      this.subjectsService.fetchSubjectSummary(this.subject.id, this.works.length).pipe(
+      this.subjectsService.fetchSubjectSummary(this.subjectId, this.works.length).pipe(
         take(1)
       ).subscribe(res => {
         console.log('res: ', res);

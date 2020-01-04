@@ -25,7 +25,7 @@
       <h2 class="about">About the Book</h2>
       <div [innerHTML]="work?.description | meta" class="description"></div>
       <h2 class="about" *ngIf="work?.subjects.length > 0">Subjects</h2>
-      <a class="subject" *ngFor="let subject of work?.subjects; let isLast=last" [routerLink]="['/subjects/'+subject]">
+      <a class="subject" *ngFor="let subject of work?.subjects; let isLast=last" [routerLink]="[getSubjectUrl(subject)]">
         {{subject}}{{isLast?'':', '}}
       </a>
       <h2 class="about" *ngIf="work?.subject_people.length > 0">People</h2>

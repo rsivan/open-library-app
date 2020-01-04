@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/subjects"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{subject.title}}</ion-title>
+    <ion-title>{{subjectTitle}}</ion-title>
   </ion-toolbar>
   <ion-searchbar placeholder="Search Books" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
 </ion-header>
