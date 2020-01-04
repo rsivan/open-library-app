@@ -19,12 +19,11 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item *ngIf="getCoverUrl()">
+      <p *ngIf="getCoverUrl()">
         <ion-img [src]="getCoverUrl()" class="cover"></ion-img>
-      </ion-item>
-      <ion-item>
-        {{work?.description}}
-      </ion-item>
+      </p>
+      <h2 class="about">About the Book</h2>
+      <div [innerHTML]="work?.description | meta" class="description"></div>
     </ion-card-content>
   </ion-card>
 
