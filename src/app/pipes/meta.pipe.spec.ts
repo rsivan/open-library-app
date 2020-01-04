@@ -22,6 +22,9 @@ describe('MetaPipe', () => {
   it ('text with new line', () => {
     expect(MetaPipe.transformer('this text has a new line:\nnext line')).toBe('this text has a new line:<br/>next line');
   });
+  it ('text with 2 new lines together', () => {
+    expect(MetaPipe.transformer('this text has two new lines:\n\nnext line')).toBe('this text has two new lines:<br/>next line');
+  });
   it ('ref', () => {
     expect(MetaPipe.transformer('this is a ref: [ref name](http://some-url.com).'))
     .toBe('this is a ref: <a href="http://some-url.com">ref name</a>.');
@@ -38,7 +41,7 @@ describe('MetaPipe', () => {
 
 Looking for the '[First Folio](https://openlibrary.org/works/OL362289W/Plays)'?`))
     // tslint:disable-next-line: max-line-length
-    .toBe(`William Shakespeare...any other playwright.  (<a href="http://en.wikipedia.org/wiki/William_Shakespeare">Source</a>.)<br/><br/><br/>Looking for the '<a href="https://openlibrary.org/works/OL362289W/Plays">First Folio</a>'?`);
+    .toBe(`William Shakespeare...any other playwright.  (<a href="http://en.wikipedia.org/wiki/William_Shakespeare">Source</a>.)<br/>Looking for the '<a href="https://openlibrary.org/works/OL362289W/Plays">First Folio</a>'?`);
   });
   // it ('text with multiplications', () => {
   //   const pipe = new MetaPipe();
