@@ -22,6 +22,24 @@ describe('MetaPipe', () => {
   it ('text with new line', () => {
     expect(MetaPipe.transformer('this text has a new line:\nnext line')).toBe('this text has a new line:<br/>next line');
   });
+  it ('ref', () => {
+    expect(MetaPipe.transformer('this is a ref: [ref name](http://some-url.com).'))
+    .toBe('this is a ref: <a href="http://some-url.com">ref name</a>.');
+  });
+  it ('source ref', () => {
+    expect(MetaPipe.sourceRef('try this: [Source][1] ...\n[1]:http://some-url.com\nThen new line.'))
+    .toBe('try this: <a href="http://some-url.com">Source</a> ...\nThen new line.');
+  });
+  it ('source ref and br', () => {
+    // tslint:disable-next-line: max-line-length
+    expect(MetaPipe.transformer(`William Shakespeare...any other playwright.  ([Source][1].)
+
+[1]:http://en.wikipedia.org/wiki/William_Shakespeare
+
+Looking for the '[First Folio](https://openlibrary.org/works/OL362289W/Plays)'?`))
+    // tslint:disable-next-line: max-line-length
+    .toBe(`William Shakespeare...any other playwright.  (<a href="http://en.wikipedia.org/wiki/William_Shakespeare">Source</a>.)<br/><br/><br/>Looking for the '<a href="https://openlibrary.org/works/OL362289W/Plays">First Folio</a>'?`);
+  });
   // it ('text with multiplications', () => {
   //   const pipe = new MetaPipe();
   //   expect(pipe.transform('a * b * c')).toBe('a * b * c');
