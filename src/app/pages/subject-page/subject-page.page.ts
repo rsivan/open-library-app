@@ -19,7 +19,7 @@ export class SubjectPagePage implements OnInit {
   private coversUrl = environment.coversUrl;
   subjectId: string;
   subjectTitle: string;
-  total = -1;
+  total = 0;
   works: any[] = [];
   filter = '';
 
@@ -94,7 +94,7 @@ export class SubjectPagePage implements OnInit {
 
   loadData(event) {
     console.log('load data - fetching offset=', this.works.length);
-    if (this.total >= 0 && this.works.length >= this.total) {
+    if (this.works.length >= this.total) {
       event.target.disabled = true;
       return;
     }
@@ -110,7 +110,7 @@ export class SubjectPagePage implements OnInit {
     this.filter = event.detail.value;
     console.log('filter: ', this.filter);
     this.works = [];
-    this.total = -1;
+    this.total = 0;
     this.infinityScroll.disabled = false;
     this.fetchData();
   }

@@ -4,6 +4,7 @@
       <ion-back-button defaultHref="/subjects"></ion-back-button>
     </ion-buttons>
     <ion-title>{{subjectTitle}}</ion-title>
+    <ion-title size="small">{{total}} works</ion-title>
   </ion-toolbar>
   <ion-searchbar placeholder="Search Books" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
 </ion-header>
