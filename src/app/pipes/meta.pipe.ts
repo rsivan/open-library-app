@@ -40,7 +40,7 @@ export class MetaPipe implements PipeTransform {
    * @param value original text
    */
   static br(value: string) {
-    return value.replace(/(\s*\n)+/g, '<br/>');
+    return value.replace(/(\s*\n)+/g, '<br/><br/>');
   }
 
   /**
@@ -48,7 +48,7 @@ export class MetaPipe implements PipeTransform {
    * @param value original text
    */
   static ref(value: string) {
-    return value.replace(/\[(.*)\]\((.*)\)/g, '<a href="$2">$1</a>');
+    return value.replace(/\[([^\]]*)\]\((.*)\)/g, '<a href="$2">$1</a>');
   }
 
   /**
