@@ -59,6 +59,6 @@ export class WorkPagePage implements OnInit {
   }
 
   getSubjectUrl(subject: string) {
-    return `/subjects/${subject}`;
+    return `/subjects/${subject.replace(/\//g, '+')}`;
   }
 }
