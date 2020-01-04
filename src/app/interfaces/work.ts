@@ -6,4 +6,8 @@ export interface Work {
     description: string;
     authors: Author[];
     covers: string[];
+    subjects: string[];
+    subject_people: string[];
+    subject_places: string[];
+    subject_times: string[];
 }

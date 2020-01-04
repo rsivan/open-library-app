@@ -39,7 +39,11 @@ export class WorkPagePage implements OnInit {
           name: a.author.key,
           id: (a.author.key as string).replace(/\/authors\//, ''),
         })) : [],
-        covers: res.covers ? res.covers : [],
+        covers: res.covers || [],
+        subjects: res.subjects || [],
+        subject_people: res.subject_people || [],
+        subject_places: res.subject_places || [],
+        subject_times: res.subject_times || [],
       };
       this.work.authors.forEach(a => {
         this.authorsService.fetchAuthor(a.id).subscribe(authRes => {

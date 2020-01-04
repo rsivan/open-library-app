@@ -24,7 +24,23 @@
       </p>
       <h2 class="about">About the Book</h2>
       <div [innerHTML]="work?.description | meta" class="description"></div>
-    </ion-card-content>
+      <h2 class="about" *ngIf="work?.subjects.length > 0">Subjects</h2>
+      <a class="subject" *ngFor="let subject of work?.subjects; let isLast=last" [routerLink]="['/subjects/'+subject]">
+        {{subject}}{{isLast?'':', '}}
+      </a>
+      <h2 class="about" *ngIf="work?.subject_people.length > 0">People</h2>
+      <a class="subject" *ngFor="let person of work?.subject_people; let isLast=last" [routerLink]="['/subjects/person:'+person]">
+        {{person}}{{isLast?'':', '}}
+      </a>
+      <h2 class="about" *ngIf="work?.subject_places.length > 0">Places</h2>
+      <a class="subject" *ngFor="let place of work?.subject_places; let isLast=last" [routerLink]="['/subjects/place:'+place]">
+        {{place}}{{isLast?'':', '}}
+      </a>
+      <h2 class="about" *ngIf="work?.subject_times.length > 0">Times</h2>
+      <a class="subject" *ngFor="let time of work?.subject_times; let isLast=last" [routerLink]="['/subjects/time:'+time]">
+        {{time}}{{isLast?'':', '}}
+      </a>
+  </ion-card-content>
   </ion-card>
 
 </ion-content>
