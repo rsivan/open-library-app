@@ -19,8 +19,8 @@ export class SubjectPagePage implements OnInit {
   private coversUrl = environment.coversUrl;
   subjectId: string;
   subjectTitle: string;
-  total = 0;
-  works: any[] = [];
+  total: number;
+  works: any[];
   filter = '';
 
   constructor(
@@ -32,6 +32,7 @@ export class SubjectPagePage implements OnInit {
     this.subjectTitle = this.route.snapshot.paramMap.get('subjectTitle');
     this.subjectId = this.subjectTitle.toLowerCase().replace(/ /g, '_');
     console.log('Subject: ', this.subjectTitle);
+    this.reset();
     this.fetchData();
   }
 
@@ -109,10 +110,16 @@ export class SubjectPagePage implements OnInit {
   onSearchChange(event) {
     this.filter = event.detail.value;
     console.log('filter: ', this.filter);
-    this.works = [];
-    this.total = 0;
-    this.infinityScroll.disabled = false;
+    this.reset();
     this.fetchData();
+  }
+
+  private reset() {
+    this.works = [];
+    this.total = -1;
+    if (this.infinityScroll) {
+      this.infinityScroll.disabled = false;
+    }
   }
 
   getCoverUrl(work) {
