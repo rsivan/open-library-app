@@ -33,11 +33,11 @@ describe('MetaPipe', () => {
     expect(MetaPipe.transformer('this is a ref: [c] etc [ref name](http://some-url.com).'))
     .toBe('this is a ref: [c] etc <a href="http://some-url.com">ref name</a>.');
   });
-  it ('source ref', () => {
-    expect(MetaPipe.sourceRef('try this: [Source][1] ...\n[1]:http://some-url.com\nThen new line.'))
-    .toBe('try this: <a href="http://some-url.com">Source</a> ...\nThen new line.');
+  it ('foot ref', () => {
+    expect(MetaPipe.footRef('try this: [Some Data with a reference][1] ...\n[1]: http://some-url.com\nThen new line.'))
+    .toBe('try this: <a href="http://some-url.com">Some Data with a reference</a> ...\nThen new line.');
   });
-  it ('source ref and br', () => {
+  it ('foot ref and br', () => {
     // tslint:disable-next-line: max-line-length
     expect(MetaPipe.transformer(`William Shakespeare...any other playwright.  ([Source][1].)
 
