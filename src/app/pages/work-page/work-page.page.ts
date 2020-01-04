@@ -54,8 +54,8 @@ export class WorkPagePage implements OnInit {
     });
   }
 
-  getCoverUrl() {
-    return this.work && this.work.covers.length > 0 ? `${this.coversUrl}/w/id/${this.work.covers[0]}-L.jpg` : null;
+  getCoverUrls() {
+    return this.work && this.work.covers.length > 0 ? this.work.covers.map(c => `${this.coversUrl}/w/id/${c}-L.jpg`) : null;
   }
 
   getSubjectUrl(subject: string) {
