@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AuthorPageRoutingModule } from './author-routing.module';
 
 import { AuthorPage } from './author.page';
+import { SharedPipesModule } from '../../pipes/shared-pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AuthorPageRoutingModule
+    AuthorPageRoutingModule,
+    SharedPipesModule
   ],
   declarations: [AuthorPage]
 })

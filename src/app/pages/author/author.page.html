@@ -24,9 +24,7 @@
           <ion-img [src]="photoUrl"></ion-img>
         </ion-slide>
       </ion-slides>
-      <ion-item>
-        {{author?.bio}}
-      </ion-item>
+      <div [innerHTML]="author?.bio | meta" class="description"></div>
     </ion-card-content>
   </ion-card>
 
