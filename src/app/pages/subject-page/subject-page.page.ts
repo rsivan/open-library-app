@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectsService } from '../../services/subjects.service';
 import { SubjectSummary } from '../../interfaces/subject-summary';
 import { take } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 import { environment } from '../../../environments/environment';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-subject-page',
@@ -12,6 +13,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./subject-page.page.scss'],
 })
 export class SubjectPagePage implements OnInit {
+
+  @ViewChild(IonInfiniteScroll, { static: false}) infinityScroll: IonInfiniteScroll;
 
   private coversUrl = environment.coversUrl;
   subject: SubjectSummary;
@@ -106,6 +109,7 @@ export class SubjectPagePage implements OnInit {
     console.log('filter: ', this.filter);
     this.works = [];
     this.total = -1;
+    this.infinityScroll.disabled = false;
     this.fetchData();
   }
 
