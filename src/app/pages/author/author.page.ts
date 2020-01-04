@@ -26,7 +26,10 @@ export class AuthorPage implements OnInit {
     });
   }
 
-  getPhotoUrl() {
-    return this.author ? `${this.coversUrl}/w/id/${this.author.photos[0]}-L.jpg` : null;
+  getPhotoUrls() {
+    if (!this.author) {
+      return null;
+    }
+    return this.author.photos.map(photo => `${this.coversUrl}/w/id/${photo}-L.jpg`);
   }
 }
