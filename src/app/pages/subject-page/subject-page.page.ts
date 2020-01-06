@@ -88,8 +88,8 @@ export class SubjectPagePage implements AfterViewInit {
   }
 
   onSearchChange(event) {
-    this.filter = event.detail.value;
-    console.log('filter: ', this.filter);
+    console.log('filter: ', event);
+    this.filter = event;
     this.reset();
     this.fetchData();
   }

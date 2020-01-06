@@ -8,6 +8,7 @@ import { SubjectPagePageRoutingModule } from './subject-page-routing.module';
 
 import { SubjectPagePage } from './subject-page.page';
 import { WorksComponent } from '../../components/works/works.component';
+import { SearchInputComponent } from '../../components/search-input/search-input.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { WorksComponent } from '../../components/works/works.component';
   declarations: [
     SubjectPagePage,
     WorksComponent,
+    SearchInputComponent,
   ]
 })
 export class SubjectPagePageModule {}
