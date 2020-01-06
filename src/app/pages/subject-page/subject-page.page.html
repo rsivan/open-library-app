@@ -11,9 +11,9 @@
     <ion-title>{{subjectTitle}}</ion-title>
     <ion-title *ngIf="total >= 0" size="small">{{total}} works</ion-title>
   </ion-toolbar>
-  <app-search-input (searchChange)="onSearchChange($event)"></app-search-input>
+  <app-search-input (searchChange)="onSearchChange($event)" [worksComponent]="works"></app-search-input>
 </ion-header>
 
 <ion-content>
-  <app-works (dataRequest)=fetchData($event)></app-works>
+  <app-works #works (totalChanged)="totalChanged($event)"></app-works>
 </ion-content>

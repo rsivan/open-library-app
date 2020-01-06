@@ -11,14 +11,21 @@ export class WorksComponent implements OnInit {
 
   @ViewChild(IonInfiniteScroll, { static: false}) infinityScroll: IonInfiniteScroll;
   @Output() dataRequest = new EventEmitter<any>();
+  @Output() totalChanged = new EventEmitter<number>();
 
   private coversUrl = environment.coversUrl;
-  total: number;
+  // tslint:disable-next-line: variable-name
+  private _total: number;
   works: any[];
 
   constructor() { }
 
   ngOnInit() {}
+
+  set total(total) {
+    this._total = total;
+    this.totalChanged.emit(total);
+  }
 
   loadData(event) {
     console.log('load data - fetching offset=', this.works.length);
@@ -38,6 +45,7 @@ export class WorksComponent implements OnInit {
     this.works = [];
     this.total = 0;
     if (this.infinityScroll) {
+      this.infinityScroll.complete();
       this.infinityScroll.disabled = false;
     }
   }

@@ -22,8 +22,7 @@ export class SubjectPagePage implements AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private subjectsService: SubjectsService,
-    private searchService: SearchService) { }
+    private subjectsService: SubjectsService) { }
 
   ngAfterViewInit() {
     this.subjectTitle = this.route.snapshot.paramMap.get('subjectTitle');
@@ -34,34 +33,7 @@ export class SubjectPagePage implements AfterViewInit {
   }
 
   fetchData(onFetchComplete = null) {
-    if (this.filter) {
-      console.log('Searching for : ', this.filter);
-      this.searchService.search(this.filter, Math.floor(1 + this.numberLoaded / 100)).pipe(
-        take(1)
-      ).subscribe(res => {
-        console.log('Search results: ', res);
-        this.worksComponent.total = this.total = res.num_found;
-        res.docs.forEach(doc => {
-          let key = doc.key as string;
-          if (key) {
-            key = key.replace(/\/works\//, '');
-          }
-          const work = {
-            key,
-            title: doc.title,
-            authors: doc.author_name ?
-              doc.author_name.map(n => ({
-                name: n
-              })) : [],
-            coverId: doc.cover_i,
-          };
-          this.addWork(work);
-        });
-        if (onFetchComplete) {
-          onFetchComplete();
-        }
-      });
-    } else {
+    if (!this.filter) {
       this.subjectsService.fetchSubjectSummary(this.subjectId, this.numberLoaded).pipe(
         take(1)
       ).subscribe(res => {
@@ -89,9 +61,13 @@ export class SubjectPagePage implements AfterViewInit {
 
   onSearchChange(event) {
     console.log('filter: ', event);
+    const prevFilter = this.filter;
     this.filter = event;
-    this.reset();
-    this.fetchData();
+    if (prevFilter && !this.filter) {
+      // refresh 'subject', now newly visible
+      this.reset();
+      this.fetchData();
+    }
   }
 
   private reset() {
@@ -103,5 +79,10 @@ export class SubjectPagePage implements AfterViewInit {
   private addWork(work: any) {
     this.worksComponent.addWork(work);
     ++this.numberLoaded;
+  }
+
+  totalChanged(total) {
+    console.log('Total: ', total);
+    this.total = total;
   }
 }
