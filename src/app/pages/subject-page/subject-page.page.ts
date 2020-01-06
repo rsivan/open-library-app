@@ -1,26 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectsService } from '../../services/subjects.service';
-import { SubjectSummary } from '../../interfaces/subject-summary';
 import { take } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
-import { environment } from '../../../environments/environment';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { WorksComponent } from '../../components/works/works.component';
 
 @Component({
   selector: 'app-subject-page',
   templateUrl: './subject-page.page.html',
   styleUrls: ['./subject-page.page.scss'],
 })
-export class SubjectPagePage implements OnInit {
+export class SubjectPagePage implements AfterViewInit {
 
-  @ViewChild(IonInfiniteScroll, { static: false}) infinityScroll: IonInfiniteScroll;
+  @ViewChild(WorksComponent, { static: false }) worksComponent: WorksComponent;
 
-  private coversUrl = environment.coversUrl;
   subjectId: string;
   subjectTitle: string;
-  total: number;
-  works: any[];
+  total = 0;
+  numberLoaded = 0;
   filter = '';
 
   constructor(
@@ -28,7 +25,7 @@ export class SubjectPagePage implements OnInit {
     private subjectsService: SubjectsService,
     private searchService: SearchService) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.subjectTitle = this.route.snapshot.paramMap.get('subjectTitle');
     this.subjectId = this.subjectTitle.toLowerCase().replace(/ /g, '_');
     console.log('Subject: ', this.subjectTitle);
@@ -36,17 +33,14 @@ export class SubjectPagePage implements OnInit {
     this.fetchData();
   }
 
-  ionViewWillEnter() {
-  }
-
-  private fetchData(onFetchComplete = null) {
+  fetchData(onFetchComplete = null) {
     if (this.filter) {
       console.log('Searching for : ', this.filter);
-      this.searchService.search(this.filter, Math.floor(1 + this.works.length / 100)).pipe(
+      this.searchService.search(this.filter, Math.floor(1 + this.numberLoaded / 100)).pipe(
         take(1)
       ).subscribe(res => {
         console.log('Search results: ', res);
-        this.total = res.num_found;
+        this.worksComponent.total = this.total = res.num_found;
         res.docs.forEach(doc => {
           let key = doc.key as string;
           if (key) {
@@ -61,18 +55,18 @@ export class SubjectPagePage implements OnInit {
               })) : [],
             coverId: doc.cover_i,
           };
-          this.works.push(work);
+          this.addWork(work);
         });
         if (onFetchComplete) {
           onFetchComplete();
         }
       });
     } else {
-      this.subjectsService.fetchSubjectSummary(this.subjectId, this.works.length).pipe(
+      this.subjectsService.fetchSubjectSummary(this.subjectId, this.numberLoaded).pipe(
         take(1)
       ).subscribe(res => {
         console.log('res: ', res);
-        this.total = res.work_count;
+        this.worksComponent.total = this.total = res.work_count;
         res.works.forEach(w => {
           let key = w.key as string;
           if (key) {
@@ -84,27 +78,13 @@ export class SubjectPagePage implements OnInit {
             authors: w.authors,
             coverId: w.cover_id,
           };
-          this.works.push(work);
+          this.addWork(work);
         });
         if (onFetchComplete) {
           onFetchComplete();
         }
       });
     }
-  }
-
-  loadData(event) {
-    console.log('load data - fetching offset=', this.works.length);
-    if (this.works.length >= this.total) {
-      event.target.disabled = true;
-      return;
-    }
-    this.fetchData(() => {
-      event.target.complete();
-      if (this.works.length >= this.total) {
-        event.target.disabled = true;
-      }
-    });
   }
 
   onSearchChange(event) {
@@ -115,14 +95,13 @@ export class SubjectPagePage implements OnInit {
   }
 
   private reset() {
-    this.works = [];
-    this.total = -1;
-    if (this.infinityScroll) {
-      this.infinityScroll.disabled = false;
-    }
+    this.numberLoaded = 0;
+    this.total = 0;
+    this.worksComponent.reset();
   }
 
-  getCoverUrl(work) {
-    return work && work.coverId ? `${this.coversUrl}/w/id/${work.coverId}-S.jpg` : null;
+  private addWork(work: any) {
+    this.worksComponent.addWork(work);
+    ++this.numberLoaded;
   }
 }

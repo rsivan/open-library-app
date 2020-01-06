@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-item *ngFor="let work of works" [routerLink]="['/works/'+work.key]" button=true detail=true lines='none'>
+    <ion-item *ngIf="getCoverUrl(work)">
+      <ion-img [src]="getCoverUrl(work)" class="cover"></ion-img>
+    </ion-item>
+    <ion-label>
+      <h2>{{work.title}}</h2>
+      <p *ngFor="let author of work.authors">{{author.name}}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+<ion-infinite-scroll threshold="25%" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
