@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, AfterViewInit, Input } from '@angular/
 import { WorksComponent } from '../works/works.component';
 import { SearchService } from '../../services/search.service';
 import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-input',
@@ -16,6 +17,7 @@ export class SearchInputComponent implements AfterViewInit {
   total = 0;
   numberLoaded = 0;
   filter = '';
+  private activeSearch: Subscription = null;
 
   constructor(
     private searchService: SearchService) { }
@@ -36,7 +38,7 @@ export class SearchInputComponent implements AfterViewInit {
   fetchData(onFetchComplete = null) {
     if (this.filter) {
       console.log('Searching for : ', this.filter);
-      this.searchService.search(this.filter, Math.floor(1 + this.numberLoaded / 100)).pipe(
+      this.activeSearch = this.searchService.search(this.filter, Math.floor(1 + this.numberLoaded / 100)).pipe(
         take(1)
       ).subscribe(res => {
         console.log('Search results: ', res);
@@ -64,7 +66,11 @@ export class SearchInputComponent implements AfterViewInit {
     }
   }
 
-  private reset() {
+  reset() {
+    if (this.activeSearch) {
+      this.activeSearch.unsubscribe();
+      this.activeSearch = null;
+    }
     this.numberLoaded = 0;
     this.total = 0;
     this.worksComponent.reset();
