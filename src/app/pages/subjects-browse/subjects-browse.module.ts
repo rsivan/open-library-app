@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SubjectsBrowsePageRoutingModule } from './subjects-browse-routing.module';
 
 import { SubjectsBrowsePage } from './subjects-browse.page';
+import { SubjectsBrowserComponent } from '../../components/subjects-browser/subjects-browser.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { SubjectsBrowsePage } from './subjects-browse.page';
     IonicModule,
     SubjectsBrowsePageRoutingModule
   ],
-  declarations: [SubjectsBrowsePage]
+  declarations: [
+    SubjectsBrowsePage,
+    SubjectsBrowserComponent,
+  ]
 })
 export class SubjectsBrowsePageModule {}

@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item *ngFor="let subject of subjects" [routerLink]='[subject.title]' button=true detail=true lines='none'>
+    <ion-thumbnail>
+      <ion-img [src]="getImageUrl(subject)" class="thumbnail"></ion-img>
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{ subject.title }}</h2>
+      <p>{{ subject.total }} books </p>
+    </ion-label>
+  </ion-item>
+</ion-list>
