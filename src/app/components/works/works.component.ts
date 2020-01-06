@@ -24,18 +24,19 @@ export class WorksComponent implements OnInit {
 
   set total(total) {
     this._total = total;
+    console.log('set total: ', total);
     this.totalChanged.emit(total);
   }
 
   loadData(event) {
-    console.log('load data - fetching offset=', this.works.length);
-    if (this.works.length >= this.total) {
+    console.log('load data - fetching offset=', this.works.length, ' total=', this._total);
+    if (this.works.length >= this._total) {
       event.target.disabled = true;
       return;
     }
     this.dataRequest.emit(() => {
       event.target.complete();
-      if (this.works.length >= this.total) {
+      if (this.works.length >= this._total) {
         event.target.disabled = true;
       }
     });
@@ -43,11 +44,9 @@ export class WorksComponent implements OnInit {
 
   reset() {
     this.works = [];
-    this.total = 0;
-    if (this.infinityScroll) {
-      this.infinityScroll.complete();
-      this.infinityScroll.disabled = false;
-    }
+    this._total = 0;
+    this.infinityScroll.complete();
+    this.infinityScroll.disabled = false;
   }
 
   getCoverUrl(work) {
