@@ -1,4 +1,4 @@
-<ion-list>
+<ion-list *ngIf="!hide">
   <ion-item *ngFor="let work of works" [routerLink]="['/works/'+work.key]" button=true detail=true lines='none'>
     <ion-item *ngIf="getCoverUrl(work)">
       <ion-img [src]="getCoverUrl(work)" class="cover"></ion-img>

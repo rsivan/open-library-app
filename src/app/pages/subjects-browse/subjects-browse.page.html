@@ -13,5 +13,5 @@
 
 <ion-content>
   <app-subjects-browser *ngIf="!isSearching"></app-subjects-browser>
-  <app-works #works (totalChanged)="totalChanged($event)" ></app-works>
+  <app-works #works (totalChanged)="totalChanged($event)" [hide]="!isSearching"></app-works>
 </ion-content>

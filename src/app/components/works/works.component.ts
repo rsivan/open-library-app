@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 
@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 export class WorksComponent implements OnInit {
 
   @ViewChild(IonInfiniteScroll, { static: false}) infinityScroll: IonInfiniteScroll;
+  @Input() hide = false;
   @Output() dataRequest = new EventEmitter<any>();
   @Output() totalChanged = new EventEmitter<number>();
 
