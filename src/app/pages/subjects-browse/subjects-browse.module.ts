@@ -7,18 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { SubjectsBrowsePageRoutingModule } from './subjects-browse-routing.module';
 
 import { SubjectsBrowsePage } from './subjects-browse.page';
-import { SubjectsBrowserComponent } from '../../components/subjects-browser/subjects-browser.component';
+import { SharedComponentsModule } from '../../components/shared-components/shared-components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SubjectsBrowsePageRoutingModule
+    SubjectsBrowsePageRoutingModule,
+    SharedComponentsModule,
   ],
   declarations: [
     SubjectsBrowsePage,
-    SubjectsBrowserComponent,
   ]
 })
 export class SubjectsBrowsePageModule {}

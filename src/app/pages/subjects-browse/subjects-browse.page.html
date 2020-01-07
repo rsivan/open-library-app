@@ -5,10 +5,13 @@
         <ion-icon slot="icon-only" name="home"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Browse by Subject</ion-title>
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-toolbar>
+  <app-subtitle *ngIf="isSearching">{{total}} works</app-subtitle>
+  <app-search-input (searchChange)="onSearchChange($event)" [worksComponent]="works"></app-search-input>
 </ion-header>
 
 <ion-content>
-  <app-subjects-browser></app-subjects-browser>
+  <app-subjects-browser *ngIf="!isSearching"></app-subjects-browser>
+  <app-works #works (totalChanged)="totalChanged($event)" ></app-works>
 </ion-content>

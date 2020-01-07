@@ -7,20 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { SubjectPagePageRoutingModule } from './subject-page-routing.module';
 
 import { SubjectPagePage } from './subject-page.page';
-import { WorksComponent } from '../../components/works/works.component';
-import { SearchInputComponent } from '../../components/search-input/search-input.component';
+import { SharedComponentsModule } from '../../components/shared-components/shared-components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SubjectPagePageRoutingModule
+    SubjectPagePageRoutingModule,
+    SharedComponentsModule,
   ],
   declarations: [
     SubjectPagePage,
-    WorksComponent,
-    SearchInputComponent,
   ]
 })
 export class SubjectPagePageModule {}

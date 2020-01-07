@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SubjectsBrowserComponent } from './subjects-browser.component';
+import { SubtitleComponent } from './subtitle.component';
 
-describe('SubjectsBrowserComponent', () => {
-  let component: SubjectsBrowserComponent;
-  let fixture: ComponentFixture<SubjectsBrowserComponent>;
+describe('SubtitleComponent', () => {
+  let component: SubtitleComponent;
+  let fixture: ComponentFixture<SubtitleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubjectsBrowserComponent ],
+      declarations: [ SubtitleComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SubjectsBrowserComponent);
+    fixture = TestBed.createComponent(SubtitleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
