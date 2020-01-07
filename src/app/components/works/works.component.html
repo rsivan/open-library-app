@@ -1,12 +1,14 @@
 <ion-list *ngIf="!hide">
-  <ion-item *ngFor="let work of works" [routerLink]="['/works/'+work.key]" button=true detail=true lines='none'>
-    <ion-item *ngIf="getCoverUrl(work)">
+  <ion-item *ngFor="let work of works" [routerLink]="['/works/'+work.key]" button=true detail=true lines='none' class='work-item'>
+    <ion-item>
       <ion-img [src]="getCoverUrl(work)" class="cover"></ion-img>
     </ion-item>
     <ion-label>
       <h2>{{work.title}}</h2>
-      <p *ngFor="let author of work.authors">{{author.name}}</p>
-    </ion-label>
+      <span *ngFor="let author of work.authors; let isLast=last" class='authors'>
+        {{author.name}}{{isLast?'':', '}}
+      </span>
+  </ion-label>
   </ion-item>
 </ion-list>
 <ion-infinite-scroll threshold="25%" (ionInfinite)="loadData($event)">

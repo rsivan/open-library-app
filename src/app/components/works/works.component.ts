@@ -51,7 +51,7 @@ export class WorksComponent implements OnInit {
   }
 
   getCoverUrl(work) {
-    return work && work.coverId ? `${this.coversUrl}/w/id/${work.coverId}-S.jpg` : null;
+    return work && work.coverId ? `${this.coversUrl}/w/id/${work.coverId}-S.jpg` : '/assets/img/cover-not-available.jpg';
   }
 
   addWork(work: any) {
