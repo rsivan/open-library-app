@@ -29,6 +29,7 @@
           <ion-img [src]="photoUrl" class="cover"></ion-img>
         </ion-slide>
       </ion-slides>
+      <p *ngIf="work?.last_modified" class='last-edited'>Last edited: {{ work.last_modified | date }}</p>
       <h2 class="about">About the Book</h2>
       <div [innerHTML]="work?.description | meta" class="description"></div>
       <h2 class="about" *ngIf="work?.subjects.length > 0">Subjects</h2>

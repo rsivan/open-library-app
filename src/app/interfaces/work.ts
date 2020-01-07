@@ -10,4 +10,5 @@ export interface Work {
     subject_people: string[];
     subject_places: string[];
     subject_times: string[];
+    last_modified: string;
 }

@@ -44,6 +44,7 @@ export class WorkPagePage implements OnInit {
         subject_people: res.subject_people || [],
         subject_places: res.subject_places || [],
         subject_times: res.subject_times || [],
+        last_modified: res.last_modified ? res.last_modified.value : null,
       };
       this.work.authors.forEach(a => {
         this.authorsService.fetchAuthor(a.id).subscribe(authRes => {
